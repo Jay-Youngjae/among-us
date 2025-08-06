@@ -25,6 +25,7 @@ export async function GET() {
     )
     .eq("created_at", today);
 
+
   if (postsError) {
     return Response.json({ error: postsError.message }, { status: 500 });
   }
