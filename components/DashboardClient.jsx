@@ -5,7 +5,7 @@ import { useAuth } from "@/app/context/AuthContext";
 import Card from "@/app/ui/Card";
 import Spinner from "@/app/ui/Spinner";
 import CreatePostButton from "@/app/ui/CreatePostButton";
-
+import LogoutButton from '@/app/ui/LogoutButton';
 
 export default function DashboardClient({ posts }) {
   const { user } = useAuth();
@@ -26,10 +26,14 @@ export default function DashboardClient({ posts }) {
   });
   return (
     <>
+      <div className="flex justify-end mb-4">
+        <LogoutButton />
+      </div>
       <div className="flex justify-between items-center my-10">
         <p className="text-lg font-semibold text-gray-800">{today}</p>
         <CreatePostButton />
       </div>
+     
       {posts.map((post) => (
         <Card
           key={post.id}
