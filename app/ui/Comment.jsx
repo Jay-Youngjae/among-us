@@ -5,6 +5,7 @@ const Comment = ({ time, content }) => {
     try {
       const date = new Date(timeString);
       return date.toLocaleString("ko-KR", {
+        timeZone: "Asia/Seoul",
         year: "numeric",
         month: "short",
         day: "numeric",
