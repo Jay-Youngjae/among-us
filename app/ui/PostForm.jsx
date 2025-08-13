@@ -3,24 +3,30 @@
 import React from "react";
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-
+import { useAuth } from '@/app/context/AuthContext'
 // 내용 입력 인풋, 등록 버튼이 있는 컴포넌트
 
 export default function PostForm({ postId }) {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+  const { user } = useAuth()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!content.trim()) return
+
+    if (!user?.id) {
+     alert('로그인이 필요합니다.')
+     return
+   }
 
     setLoading(true)
 
     const res = await fetch(`/api/${postId}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content }),
+      body: JSON.stringify({ content, authorId: user.id }),
     })
 
     setLoading(false)
