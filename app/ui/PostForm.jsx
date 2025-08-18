@@ -1,6 +1,7 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from "react";
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/app/context/AuthContext'
 import { useSWRConfig } from 'swr'
@@ -16,12 +17,8 @@ export default function PostForm({ postId }) {
     e.preventDefault()
     if (!content.trim()) return
 
-    if (!user?.id) {
-      alert('로그인이 필요합니다.')
-      return
-    }
-
     setLoading(true)
+
     try {
       const res = await fetch(`/api/${postId}`, {
         method: 'POST',

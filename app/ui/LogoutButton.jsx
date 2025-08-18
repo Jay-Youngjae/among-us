@@ -2,24 +2,35 @@
 
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/context/AuthContext';
+import Button from '@/components/Button';
 
 export default function LogoutButton({ className = '' }) {
   const { logout } = useAuth();
   const router = useRouter();
 
-  const handleLogout = () => {
-    logout();           // 전역 상태 + localStorage 정리
-    router.push('/login'); // 로그인 페이지로 이동
-    router.refresh();      // 화면 갱신
+  const handleLogout = async () => {
+    try {
+      // 서버 쿠키 삭제 API 호출
+      await fetch('/api/auth/logout', { method: 'POST' });
+
+      // 클라이언트 전역 상태/스토리지 초기화
+      logout();
+
+      // 로그인 페이지로 이동
+      router.push('/login');
+      router.refresh();
+    } catch (error) {
+      console.error('로그아웃 실패:', error);
+    }
   };
 
   return (
-    <button
+    <Button
       onClick={handleLogout}
-      className={`px-4 py-2 rounded-md bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium ${className}`}
+      className={`!w-auto px-4 py-2 ${className}`}
       aria-label="로그아웃"
     >
       로그아웃
-    </button>
+    </Button>
   );
 }

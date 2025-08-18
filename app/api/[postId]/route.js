@@ -35,7 +35,7 @@ export async function GET(request, { params }) {
         .select("*")
         .eq("post_id", postId)
         .order("created_at", { ascending: true });
-        
+
       if (commentsError) {
         console.error('All comments fetch error:', commentsError);
         return Response.json({ error: commentsError.message }, { status: 500 });
@@ -48,7 +48,7 @@ export async function GET(request, { params }) {
         .eq("post_id", postId)
         .eq("author_id", viewerId)
         .order("created_at", { ascending: true });
-        
+
       if (commentsError) {
         console.error('My comments fetch error:', commentsError);
         return Response.json({ error: commentsError.message }, { status: 500 });
@@ -56,16 +56,10 @@ export async function GET(request, { params }) {
       comments = myComments || [];
     }
 
-    return Response.json({ 
-      post, 
-      comments, 
+    return Response.json({
+      post,
+      comments,
       isPresenter,
-      debug: {
-        viewerId,
-        presenterId: post.presenter_id,
-        isPresenter,
-        commentsCount: comments.length
-      }
     });
 
   } catch (error) {
