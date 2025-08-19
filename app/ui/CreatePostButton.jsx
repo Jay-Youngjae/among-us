@@ -18,7 +18,7 @@ export default function CreatePostButton() {
         <>
             <Button
                 onClick={() => setIsOpen(true)}
-                className="!w-auto px-4 py-2"
+                className="!w-auto px-4 py-2 bg-blue-400 hover:bg-blue-700"
             >
                 게시글 생성
             </Button>

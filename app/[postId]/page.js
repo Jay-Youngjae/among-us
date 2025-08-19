@@ -1,4 +1,3 @@
-// app/dashboard/[postId]/page.js
 import { Suspense } from "react";
 import PostForm from "../ui/PostForm";
 import Spinner from "../ui/Spinner";
