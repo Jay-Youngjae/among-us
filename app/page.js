@@ -14,24 +14,24 @@ async function getPosts() {
   return json.data;
 }
 
-async function getCurrentUser(userId) {
-  const { data, error } = await supabase
-    .from("users")
-    .select("level")
-    .eq("id", userId)
-    .single();
+// async function getCurrentUser(userId) {
+//   const { data, error } = await supabase
+//     .from("users")
+//     .select("level")
+//     .eq("id", userId)
+//     .single();
 
-  if (error) {
-    //console.error(error);
-    return null;
-  }
+//   if (error) {
+//     //console.error(error);
+//     return null;
+//   }
 
-  return data;
-}
+//   return data;
+// }
 
 export default async function DashboardPage() {
   const user = await requireAuth();
-  const currentUser = await getCurrentUser(user.id);
+  // const currentUser = await getCurrentUser(user.id);
 
   const posts = await getPosts();
 
