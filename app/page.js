@@ -7,7 +7,8 @@ import CreatePostButton from "@/app/ui/CreatePostButton";
 import supabase from "@/lib/supabaseClient";
 
 async function getPosts() {
-  const res = await fetch("/api", {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  const res = await fetch(`${baseUrl}/api`, {
     cache: "no-store",
   });
   const json = await res.json();
